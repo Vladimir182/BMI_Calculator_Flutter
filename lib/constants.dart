@@ -14,3 +14,9 @@ const kNumberTextStyle = TextStyle(
   fontSize: 50.0,
   fontWeight: FontWeight.w900,
 );
+
+//Slider theme
+
+const kSliderActiveTrackColor = Colors.white;
+const kSliderInactiveTrackColor = Color(0xFF8D8E98);
+const kSliderThumbColor = Color(0xFFEB1555);
