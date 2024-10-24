@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../calculator_brain.dart';
 import '../components/bottom_button.dart';
 import '../constants.dart';
 import '../components/icon_content.dart';
@@ -22,9 +23,9 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   GenderType? selectedGender;
-  int _height = 180;
-  int _weight = 60;
-  int _age = 30;
+  int height = 180;
+  int weight = 60;
+  int age = 30;
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +89,7 @@ class _InputPageState extends State<InputPage> {
                     crossAxisAlignment: CrossAxisAlignment.baseline,
                     children: [
                       Text(
-                        _height.toString(),
+                        height.toString(),
                         style: kNumberTextStyle,
                       ),
                       const Text(
@@ -98,14 +99,14 @@ class _InputPageState extends State<InputPage> {
                     ],
                   ),
                   Slider(
-                      value: _height.toDouble(),
+                      value: height.toDouble(),
                       min: 120,
                       max: 220,
                       // activeColor: Color(0xFFEB1555),
                       // inactiveColor: const Color(0xFF8D8E98),
                       onChanged: (double newValue) {
                         setState(() {
-                          _height = newValue.round();
+                          height = newValue.round();
                         });
                       }),
                 ],
@@ -127,7 +128,7 @@ class _InputPageState extends State<InputPage> {
                           style: kLabelTextStyle,
                         ),
                         Text(
-                          _weight.toString(),
+                          weight.toString(),
                           style: kNumberTextStyle,
                         ),
                         Row(
@@ -137,7 +138,7 @@ class _InputPageState extends State<InputPage> {
                               icon: FontAwesomeIcons.minus,
                               onPressed: () {
                                 setState(() {
-                                  _weight--;
+                                  weight--;
                                 });
                               },
                             ),
@@ -148,7 +149,7 @@ class _InputPageState extends State<InputPage> {
                               icon: FontAwesomeIcons.plus,
                               onPressed: () {
                                 setState(() {
-                                  _weight++;
+                                  weight++;
                                 });
                               },
                             ),
@@ -169,7 +170,7 @@ class _InputPageState extends State<InputPage> {
                           style: kLabelTextStyle,
                         ),
                         Text(
-                          _age.toString(),
+                          age.toString(),
                           style: kNumberTextStyle,
                         ),
                         Row(
@@ -179,7 +180,7 @@ class _InputPageState extends State<InputPage> {
                               icon: FontAwesomeIcons.minus,
                               onPressed: () {
                                 setState(() {
-                                  _age--;
+                                  age--;
                                 });
                               },
                             ),
@@ -190,7 +191,7 @@ class _InputPageState extends State<InputPage> {
                               icon: FontAwesomeIcons.plus,
                               onPressed: () {
                                 setState(() {
-                                  _age++;
+                                  age++;
                                 });
                               },
                             ),
@@ -204,8 +205,22 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           BottomButton(
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ResultsPage())),
+            onTap: () {
+              CalculatorBrain calc = CalculatorBrain(
+                height: height,
+                weight: weight,
+              );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultsPage(
+                    bmiResult: calc.calculateBMI(),
+                    interpretation: calc.getInterpretation(),
+                    resultText: calc.getResult(),
+                  ),
+                ),
+              );
+            },
             buttonTitle: 'CALCULATE',
           ),
         ],
