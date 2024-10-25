@@ -217,6 +217,14 @@ class _InputPageState extends State<InputPage> {
                     bmiResult: calc.calculateBMI(),
                     interpretation: calc.getInterpretation(),
                     resultText: calc.getResult(),
+                    age: age,
+                    gender: IconContent(
+                      label:
+                          selectedGender == GenderType.male ? 'Male' : 'Female',
+                      icon: selectedGender == GenderType.male
+                          ? FontAwesomeIcons.mars
+                          : FontAwesomeIcons.venus,
+                    ),
                   ),
                 ),
               );

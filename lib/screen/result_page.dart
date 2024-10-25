@@ -10,11 +10,15 @@ class ResultsPage extends StatelessWidget {
     required this.bmiResult,
     required this.interpretation,
     required this.resultText,
+    required this.age,
+    required this.gender,
   });
 
   final String bmiResult;
   final String resultText;
   final String interpretation;
+  final int age;
+  final Widget gender;
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +52,29 @@ class ResultsPage extends StatelessWidget {
                     resultText.toUpperCase(),
                     style: kResultTextStyle,
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      gender,
+                      Text(
+                        '${age.toString()} Age',
+                        style: const TextStyle(
+                          fontSize: 40,
+                        ),
+                      ),
+                    ],
+                  ),
                   Text(
                     bmiResult,
                     style: kBMITextStyle,
                   ),
-                  Text(
-                    interpretation,
-                    style: kBodyTextStyle,
-                    textAlign: TextAlign.center,
+                  Container(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text(
+                      interpretation,
+                      style: kBodyTextStyle,
+                      textAlign: TextAlign.center,
+                    ),
                   )
                 ],
               ),
